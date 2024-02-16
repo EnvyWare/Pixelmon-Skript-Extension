@@ -1,0 +1,6 @@
+name: PixelmonSK
+version: 1.0.0
+main: com.envyful.pixelmon.skript.PixelmonSkript
+author: Envyful
+description: A Skript addon for Pixelmon
+depend: [Skript]
