@@ -46,6 +46,19 @@ This allows you to get the name of the form of a pokemon
 set {_form} to {_pokemon}'s form
 ```
 
+#### Pokemon Ability
+This allows you to get the ability of the pokemon
+```skript
+set {_ability} to {_pokemon}'s ability
+```
+
+#### Ability Name
+This allows you to get the name of an ability
+```skript
+set {_ability} to {_pokemon}'s ability
+set {_ability_name} to {_ability}'s abilityname
+```
+
 #### Pokemon Dex
 This allows you to get the dex number of a pokemon
 ```skript

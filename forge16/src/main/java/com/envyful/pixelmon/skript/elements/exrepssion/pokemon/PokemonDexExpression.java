@@ -1,4 +1,4 @@
-package com.envyful.pixelmon.skript.elements.exrepssion;
+package com.envyful.pixelmon.skript.elements.exrepssion.pokemon;
 
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;

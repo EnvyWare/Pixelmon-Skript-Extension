@@ -12,6 +12,8 @@ import com.pixelmonmod.api.pokemon.PokemonSpecificationProxy;
 import com.pixelmonmod.api.pokemon.requirement.impl.SpeciesRequirement;
 import com.pixelmonmod.pixelmon.api.dialogue.Choice;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
+import com.pixelmonmod.pixelmon.api.pokemon.ability.Ability;
+import com.pixelmonmod.pixelmon.api.pokemon.ability.AbilityRegistry;
 import com.pixelmonmod.pixelmon.api.registries.PixelmonRequirements;
 import com.pixelmonmod.pixelmon.entities.pixelmon.PixelmonEntity;
 import org.bukkit.Bukkit;
@@ -45,6 +47,33 @@ public class ClassInformation {
                     @Override
                     public boolean canParse(ParseContext context) {
                         return false;
+                    }
+                }));
+        Classes.registerClass(new ClassInfo<>(Ability.class, "ability")
+                .name("Ability")
+                .description("Represents a Pixelmon Pokemon Ability")
+                .usage("ability")
+                .after("string", "pokemon")
+                .defaultExpression(new EventValueExpression<>(Ability.class))
+                .parser(new Parser<>() {
+                    @Override
+                    public Ability parse(String s, ParseContext context) {
+                        return AbilityRegistry.getAbility(s).orElse(null);
+                    }
+
+                    @Override
+                    public String toString(Ability pokemon, int flags) {
+                        return toVariableNameString(pokemon);
+                    }
+
+                    @Override
+                    public String toVariableNameString(Ability pokemon) {
+                        return "ability-" + pokemon.getName();
+                    }
+
+                    @Override
+                    public boolean canParse(ParseContext context) {
+                        return true;
                     }
                 }));
         Classes.registerClass(new ClassInfo<>(PokemonSpecification.class, "spec")
