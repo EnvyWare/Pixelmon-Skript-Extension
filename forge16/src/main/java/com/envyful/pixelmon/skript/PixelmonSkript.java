@@ -2,7 +2,6 @@ package com.envyful.pixelmon.skript;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
-import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
