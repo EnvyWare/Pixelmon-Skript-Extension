@@ -21,9 +21,16 @@ subprojects {
         maven { url = "https://oss.sonatype.org/content/repositories/snapshots" }
         maven { url = "https://repo.lucko.me/" }
         maven { url = "https://repo.aikar.co/content/groups/aikar/" }
-        maven { url = "https://jitpack.io" }
         maven { url = "https://repo.spongepowered.org/maven" }
         maven { url = "https://maven.envyware.co.uk/releases" }
+        maven { url = "https://repo.papermc.io/repository/maven-public/" }
+        maven {
+            name = 'spigotmc-repo'
+            url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+        }
+        maven {
+            url 'https://repo.skriptlang.org/releases'
+        }
         ivy {
             setUrl('https://download.nodecdn.net/containers/reforged/server/release')
             metadataSources {

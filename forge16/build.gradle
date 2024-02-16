@@ -18,6 +18,8 @@ repositories {}
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.39'
     implementation 'pixelmon:Pixelmon-1.16.5-9.1.10-server:9.1.10'
+    compileOnly("org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT")
+    compileOnly 'com.github.SkriptLang:Skript:2.8.2'
 
     implementation "com.envyful.papi:api:2.0.5"
 
