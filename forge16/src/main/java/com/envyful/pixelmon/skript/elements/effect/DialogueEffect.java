@@ -5,9 +5,11 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.envyful.pixelmon.skript.event.DialogueChoiceEvent;
 import com.google.common.collect.Lists;
 import com.pixelmonmod.pixelmon.api.dialogue.Choice;
 import com.pixelmonmod.pixelmon.api.dialogue.Dialogue;
+import com.pixelmonmod.pixelmon.comm.packetHandlers.dialogue.DialogueNextActionPacket;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -39,8 +41,13 @@ public class DialogueEffect extends Effect {
                 .setText(description)
                 .setChoices(Lists.newArrayList(choice));
 
-        for (var player : players) {
-            builder.open(ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayer(player.getUniqueId()));
+        if (event instanceof DialogueChoiceEvent) {
+            ((DialogueChoiceEvent) event).getEvent().setAction(DialogueNextActionPacket.DialogueGuiAction.NEW_DIALOGUES);
+            ((DialogueChoiceEvent) event).getEvent().addDialogue(builder.build());
+        } else {
+            for (var player : players) {
+                builder.open(ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayer(player.getUniqueId()));
+            }
         }
     }
 
