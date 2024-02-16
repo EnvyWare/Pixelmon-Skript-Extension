@@ -5,13 +5,16 @@ import ch.njol.skript.classes.Parser;
 import ch.njol.skript.expressions.base.EventValueExpression;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
+import com.envyful.pixelmon.skript.event.DialogueChoiceEvent;
 import com.pixelmonmod.api.SpecificationFactory;
 import com.pixelmonmod.api.pokemon.PokemonSpecification;
 import com.pixelmonmod.api.pokemon.PokemonSpecificationProxy;
 import com.pixelmonmod.api.pokemon.requirement.impl.SpeciesRequirement;
+import com.pixelmonmod.pixelmon.api.dialogue.Choice;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.api.registries.PixelmonRequirements;
 import com.pixelmonmod.pixelmon.entities.pixelmon.PixelmonEntity;
+import org.bukkit.Bukkit;
 
 public class ClassInformation {
 
@@ -72,6 +75,34 @@ public class ClassInformation {
                     @Override
                     public String toVariableNameString(PokemonSpecification pokemon) {
                         return "spec-" + pokemon.toString();
+                    }
+                }));
+
+        Classes.registerClass(new ClassInfo<>(Choice.class, "choice")
+                .name("Choice")
+                .description("Represents a Choice in a dialogue event")
+                .usage("choice")
+                .after("string")
+                .user("choices?")
+                .defaultExpression(new EventValueExpression<>(Choice.class))
+                .parser(new Parser<>() {
+                    @Override
+                    public Choice parse(String s, ParseContext context) {
+                        var text = s;
+                        return Choice.builder()
+                                .setText(text)
+                                .setHandle(dialogueChoiceEvent -> Bukkit.getPluginManager().callEvent(new DialogueChoiceEvent(dialogueChoiceEvent)))
+                                .build();
+                    }
+
+                    @Override
+                    public String toString(Choice pokemon, int flags) {
+                        return toVariableNameString(pokemon);
+                    }
+
+                    @Override
+                    public String toVariableNameString(Choice pokemon) {
+                        return "choice" + pokemon.text;
                     }
                 }));
     }
