@@ -44,6 +44,12 @@ set {_name} to {_pokemon}'s species
 This allows you to get the level of the Pokemon
 ```skript
 set {_level} to {_pokemon}'s level
+```
+
+#### Pokemon's Palette
+This allows you to get the palette of the Pokemon
+```skript
+set {_level} to {_pokemon}'s palette
 ``
 
 #### Pokemon Form
