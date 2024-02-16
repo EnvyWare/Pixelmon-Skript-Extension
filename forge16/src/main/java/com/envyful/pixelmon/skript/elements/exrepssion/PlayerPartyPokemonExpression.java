@@ -11,17 +11,19 @@ import com.pixelmonmod.pixelmon.api.storage.StorageProxy;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
-public class PlayerPartyExpression extends SimpleExpression<Pokemon> {
+public class PlayerPartyPokemonExpression extends SimpleExpression<Pokemon> {
 
     static {
-        Skript.registerExpression(PlayerPartyExpression.class, Pokemon.class, ExpressionType.COMBINED, "party of %player%");
+        Skript.registerExpression(PlayerPartyPokemonExpression.class, Pokemon.class, ExpressionType.COMBINED, "pokemon %number% of %player%");
     }
 
     private Expression<Player> player;
+    private Expression<Number> party;
 
     @Override
     protected Pokemon[] get(Event event) {
         var player = this.player.getSingle(event);
+        var slot = this.party.getSingle(event);
 
         var partyStorage = StorageProxy.getParty(player.getUniqueId());
 
@@ -29,12 +31,12 @@ public class PlayerPartyExpression extends SimpleExpression<Pokemon> {
             return null;
         }
 
-        return partyStorage.getAll();
+        return new Pokemon[] {partyStorage.getAll()[slot.intValue() - 1]};
     }
 
     @Override
     public boolean isSingle() {
-        return false;
+        return true;
     }
 
     @Override
@@ -44,12 +46,13 @@ public class PlayerPartyExpression extends SimpleExpression<Pokemon> {
 
     @Override
     public String toString(Event event, boolean debug) {
-        return "party" + this.player.toString(event, debug);
+        return "pokemon";
     }
 
     @Override
     public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
         this.player = (Expression<Player>) expressions[1];
+        this.party = (Expression<Number>) expressions[0];
         return true;
     }
 }
