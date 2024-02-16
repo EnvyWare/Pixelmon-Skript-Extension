@@ -40,6 +40,12 @@ This allows you to get the name of the species of a pokemon
 set {_name} to {_pokemon}'s species
 ```
 
+#### Pokemon's Level
+This allows you to get the level of the Pokemon
+```skript
+set {_level} to {_pokemon}'s level
+``
+
 #### Pokemon Form
 This allows you to get the name of the form of a pokemon
 ```skript
