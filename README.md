@@ -130,6 +130,10 @@ add Test two to {_choices::*}
 dialogue for {_player} title "Hello World" description "Description!" with {_choices::*}
 ```
 
+> **NOTE** \
+> If you use this in the dialogue choice event then
+> it will pass through to the next dialogue box seemlessly
+
 #### Input Dialogue Box
 This allows you to open an input dialogue box for a player
 ```skript
