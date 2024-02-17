@@ -1,8 +1,7 @@
-package com.envyful.pixelmon.skript.elements.exrepssion.pokemon;
+package com.envyful.pixelmon.skript.elements.expression.pokemon;
 
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
-import com.pixelmonmod.pixelmon.api.pokemon.ability.Ability;
 
 public class PokemonLevelExpression extends SimplePropertyExpression<Pokemon, Integer> {
 

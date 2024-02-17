@@ -11,19 +11,22 @@ import com.pixelmonmod.pixelmon.api.dialogue.Choice;
 import com.pixelmonmod.pixelmon.api.dialogue.Dialogue;
 import com.pixelmonmod.pixelmon.comm.packetHandlers.dialogue.DialogueNextActionPacket;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+
+import java.util.stream.Collectors;
 
 public class DialogueEffect extends Effect {
 
     static {
-        Skript.registerEffect(DialogueEffect.class, "dialogue for %player% title %string% description %string% with %choices%");
+        Skript.registerEffect(DialogueEffect.class, "dialogue for %player% title %string% description %string% with %string%");
     }
 
     private Expression<Player> player;
     private Expression<String> title;
     private Expression<String> description;
-    private Expression<Choice> choice;
+    private Expression<String> choice;
 
     @Override
     protected void execute(Event event) {
@@ -39,7 +42,10 @@ public class DialogueEffect extends Effect {
         var builder = Dialogue.builder()
                 .setName(title)
                 .setText(description)
-                .setChoices(Lists.newArrayList(choice));
+                .setChoices(Lists.newArrayList(
+                        Lists.newArrayList(choice).stream()
+                                .map(s -> Choice.builder().setText(s).setHandle(dialogueChoiceEvent -> Bukkit.getPluginManager().callEvent(new DialogueChoiceEvent(dialogueChoiceEvent))).build())
+                                .collect(Collectors.toList())));
 
         if (event instanceof DialogueChoiceEvent) {
             ((DialogueChoiceEvent) event).getEvent().setAction(DialogueNextActionPacket.DialogueGuiAction.NEW_DIALOGUES);
@@ -61,7 +67,7 @@ public class DialogueEffect extends Effect {
         this.player = (Expression<Player>) expressions[0];
         this.title = (Expression<String>) expressions[1];
         this.description = (Expression<String>) expressions[2];
-        this.choice = (Expression<Choice>) expressions[3];
+        this.choice = (Expression<String>) expressions[3];
         return true;
     }
 }

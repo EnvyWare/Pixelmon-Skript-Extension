@@ -1,22 +1,22 @@
-package com.envyful.pixelmon.skript.elements.exrepssion.pokemon;
+package com.envyful.pixelmon.skript.elements.expression;
 
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 
-public class PokemonPaletteExpression extends SimplePropertyExpression<Pokemon, String> {
+public class FormattedPokemonDexExpression extends SimplePropertyExpression<Pokemon, String> {
 
     static {
-        register(PokemonPaletteExpression.class, String.class, "palette", "pokemon");
+        register(FormattedPokemonDexExpression.class, String.class, "formatteddex", "pokemon");
     }
 
     @Override
     public String convert(Pokemon pokemon) {
-        return pokemon.getPalette().getName();
+        return pokemon.getSpecies().getFormattedDex();
     }
 
     @Override
     protected String getPropertyName() {
-        return "palette";
+        return "formatteddex";
     }
 
     @Override

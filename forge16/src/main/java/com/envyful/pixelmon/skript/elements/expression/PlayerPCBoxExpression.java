@@ -1,4 +1,4 @@
-package com.envyful.pixelmon.skript.elements.exrepssion;
+package com.envyful.pixelmon.skript.elements.expression;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Expression;
@@ -11,25 +11,26 @@ import com.pixelmonmod.pixelmon.api.storage.StorageProxy;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
-public class PlayerPartyExpression extends SimpleExpression<Pokemon> {
+public class PlayerPCBoxExpression extends SimpleExpression<Pokemon> {
 
     static {
-        Skript.registerExpression(PlayerPartyExpression.class, Pokemon.class, ExpressionType.COMBINED, "party of %player%");
+        Skript.registerExpression(PlayerPCBoxExpression.class, Pokemon.class, ExpressionType.COMBINED, "box %number% for %player%");
     }
 
     private Expression<Player> player;
+    private Expression<Number> box;
 
     @Override
     protected Pokemon[] get(Event event) {
         var player = this.player.getSingle(event);
 
-        var partyStorage = StorageProxy.getParty(player.getUniqueId());
+        var pcStorage = StorageProxy.getPCForPlayer(player.getUniqueId());
 
-        if (partyStorage == null) {
+        if (pcStorage == null) {
             return null;
         }
 
-        return partyStorage.getAll();
+        return pcStorage.getBox(box.getSingle(event).intValue()).getAll();
     }
 
     @Override
@@ -44,12 +45,13 @@ public class PlayerPartyExpression extends SimpleExpression<Pokemon> {
 
     @Override
     public String toString(Event event, boolean debug) {
-        return "party" + this.player.toString(event, debug);
+        return "pc box " + this.box.toString(event, debug) + " for " + this.player.toString(event, debug);
     }
 
     @Override
     public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
         this.player = (Expression<Player>) expressions[1];
+        this.box = (Expression<Number>) expressions[0];
         return true;
     }
 }

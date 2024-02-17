@@ -7,22 +7,23 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.envyful.api.forge.world.UtilWorld;
 import com.pixelmonmod.api.pokemon.PokemonSpecification;
+import com.pixelmonmod.api.pokemon.PokemonSpecificationProxy;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
 
 public class SpawnPokemonEffect extends Effect {
 
     static {
-        Skript.registerEffect(SpawnPokemonEffect.class, "(pokespawn|spawnpokemon|spawnpoke) %location% %spec%");
+        Skript.registerEffect(SpawnPokemonEffect.class, "(pokespawn|spawnpokemon|spawnpoke) %location% %string%");
     }
 
     private Expression<Location> location;
-    private Expression<PokemonSpecification> spec;
+    private Expression<String> spec;
 
     @Override
     protected void execute(Event event) {
         var location = this.location.getSingle(event);
-        var spec = this.spec.getSingle(event);
+        var spec = PokemonSpecificationProxy.create(this.spec.getSingle(event));
         var forgeWorld = UtilWorld.findWorld(location.getWorld().getName());
 
         var pokemonEntity = spec.create(forgeWorld);
@@ -38,7 +39,7 @@ public class SpawnPokemonEffect extends Effect {
     @Override
     public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
         this.location = (Expression<Location>) expressions[0];
-        this.spec = (Expression<PokemonSpecification>) expressions[1];
+        this.spec = (Expression<String>) expressions[1];
         return true;
     }
 }

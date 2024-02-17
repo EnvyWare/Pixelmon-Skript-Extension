@@ -1,7 +1,6 @@
-package com.envyful.pixelmon.skript.elements.exrepssion.ability;
+package com.envyful.pixelmon.skript.elements.expression.ability;
 
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.api.pokemon.ability.Ability;
 
 public class AbilityNameExpression extends SimplePropertyExpression<Ability, String> {

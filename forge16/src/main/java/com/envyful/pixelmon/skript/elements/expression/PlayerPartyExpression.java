@@ -1,4 +1,4 @@
-package com.envyful.pixelmon.skript.elements.exrepssion;
+package com.envyful.pixelmon.skript.elements.expression;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Expression;
@@ -11,33 +11,30 @@ import com.pixelmonmod.pixelmon.api.storage.StorageProxy;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
-public class PlayerPCPokemonExpression extends SimpleExpression<Pokemon> {
+public class PlayerPartyExpression extends SimpleExpression<Pokemon> {
 
     static {
-        Skript.registerExpression(PlayerPCPokemonExpression.class, Pokemon.class, ExpressionType.COMBINED, "pokemon %number% (of|in) (box)? %number% for %player%");
+        Skript.registerExpression(PlayerPartyExpression.class, Pokemon.class, ExpressionType.COMBINED, "party of %player%");
     }
 
     private Expression<Player> player;
-    private Expression<Number> box;
-    private Expression<Number> slot;
 
     @Override
     protected Pokemon[] get(Event event) {
         var player = this.player.getSingle(event);
-        var slot = this.slot.getSingle(event);
 
-        var pcStorage = StorageProxy.getPCForPlayer(player.getUniqueId());
+        var partyStorage = StorageProxy.getParty(player.getUniqueId());
 
-        if (pcStorage == null) {
+        if (partyStorage == null) {
             return null;
         }
 
-        return new Pokemon[] {pcStorage.get(box.getSingle(event).intValue(), slot.intValue())};
+        return partyStorage.getAll();
     }
 
     @Override
     public boolean isSingle() {
-        return true;
+        return false;
     }
 
     @Override
@@ -47,14 +44,12 @@ public class PlayerPCPokemonExpression extends SimpleExpression<Pokemon> {
 
     @Override
     public String toString(Event event, boolean debug) {
-        return "pc box " + this.box.toString(event, debug) + " pokemon " + this.slot.toString(event, debug) + " for " + this.player.toString(event, debug);
+        return "party" + this.player.toString(event, debug);
     }
 
     @Override
     public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
-        this.player = (Expression<Player>) expressions[2];
-        this.slot = (Expression<Number>) expressions[0];
-        this.box = (Expression<Number>) expressions[1];
+        this.player = (Expression<Player>) expressions[1];
         return true;
     }
 }

@@ -1,4 +1,4 @@
-package com.envyful.pixelmon.skript.elements.exrepssion;
+package com.envyful.pixelmon.skript.elements.expression;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Expression;

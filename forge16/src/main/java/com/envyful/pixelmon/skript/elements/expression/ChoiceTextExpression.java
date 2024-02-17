@@ -1,8 +1,7 @@
-package com.envyful.pixelmon.skript.elements.exrepssion;
+package com.envyful.pixelmon.skript.elements.expression;
 
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import com.pixelmonmod.pixelmon.api.dialogue.Choice;
-import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 
 public class ChoiceTextExpression extends SimplePropertyExpression<Choice, String> {
 

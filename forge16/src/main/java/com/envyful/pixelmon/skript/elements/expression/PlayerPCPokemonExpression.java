@@ -1,4 +1,4 @@
-package com.envyful.pixelmon.skript.elements.exrepssion;
+package com.envyful.pixelmon.skript.elements.expression;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Expression;
@@ -11,18 +11,20 @@ import com.pixelmonmod.pixelmon.api.storage.StorageProxy;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
-public class PlayerPCBoxExpression extends SimpleExpression<Pokemon> {
+public class PlayerPCPokemonExpression extends SimpleExpression<Pokemon> {
 
     static {
-        Skript.registerExpression(PlayerPCBoxExpression.class, Pokemon.class, ExpressionType.COMBINED, "box %number% for %player%");
+        Skript.registerExpression(PlayerPCPokemonExpression.class, Pokemon.class, ExpressionType.COMBINED, "pokemon %number% (of|in) (box)? %number% for %player%");
     }
 
     private Expression<Player> player;
     private Expression<Number> box;
+    private Expression<Number> slot;
 
     @Override
     protected Pokemon[] get(Event event) {
         var player = this.player.getSingle(event);
+        var slot = this.slot.getSingle(event);
 
         var pcStorage = StorageProxy.getPCForPlayer(player.getUniqueId());
 
@@ -30,12 +32,12 @@ public class PlayerPCBoxExpression extends SimpleExpression<Pokemon> {
             return null;
         }
 
-        return pcStorage.getBox(box.getSingle(event).intValue()).getAll();
+        return new Pokemon[] {pcStorage.get(box.getSingle(event).intValue(), slot.intValue())};
     }
 
     @Override
     public boolean isSingle() {
-        return false;
+        return true;
     }
 
     @Override
@@ -45,13 +47,14 @@ public class PlayerPCBoxExpression extends SimpleExpression<Pokemon> {
 
     @Override
     public String toString(Event event, boolean debug) {
-        return "pc box " + this.box.toString(event, debug) + " for " + this.player.toString(event, debug);
+        return "pc box " + this.box.toString(event, debug) + " pokemon " + this.slot.toString(event, debug) + " for " + this.player.toString(event, debug);
     }
 
     @Override
     public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
-        this.player = (Expression<Player>) expressions[1];
-        this.box = (Expression<Number>) expressions[0];
+        this.player = (Expression<Player>) expressions[2];
+        this.slot = (Expression<Number>) expressions[0];
+        this.box = (Expression<Number>) expressions[1];
         return true;
     }
 }
