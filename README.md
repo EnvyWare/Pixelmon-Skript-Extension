@@ -34,6 +34,12 @@ if {_pokemon} does not match shiny:
 
 ### Expressions
 
+#### Duplicate/Copy Pokemon
+This allows you to make an exact copy of the Pokemon, with a new UUID.
+```skript
+set {_copy_pokemon} to {_pokemon}'s copy
+```
+
 #### Species Name
 This allows you to get the name of the species of a pokemon
 ```skript
@@ -50,7 +56,7 @@ set {_level} to {_pokemon}'s level
 This allows you to get the palette of the Pokemon
 ```skript
 set {_level} to {_pokemon}'s palette
-``
+```
 
 #### Pokemon Form
 This allows you to get the name of the form of a pokemon
@@ -171,6 +177,16 @@ This event is triggered when the player closes a dialogue input box
 ```skript
 on dialogue input close:
   message "wow!"
+```
+
+#### Successful Capture Event
+This event is triggered when a player successfully captures a Pokemon
+```skript
+on successful capture:
+   set {_player} to player
+   set {_pokemon} to event-pokemon
+   set {_entity} to event-pixelmon
+   message "WOW! %{_pokemon}% %{_player}% %{_test}%"
 ```
 
 ### Example
