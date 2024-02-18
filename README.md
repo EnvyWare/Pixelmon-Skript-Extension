@@ -28,7 +28,7 @@ The above checks if the Pokemon in the variable `_pokemon` is a shiny, and if it
 
 This can also be used to in the opposite way like so:
 ```skript
-if {_pokemon} does not match shiny:
+if {_pokemon} does not match "shiny":
    message "not shiny"
 ```
 
@@ -119,20 +119,20 @@ set {_pokemon::*} to party of {_player}
 This allows you to spawn a pokemon at a location
 ```skript
 set {_location} to position of {_player}
-pokespawn {_location} random shiny
+pokespawn {_location} "random shiny"
 ```
 
 #### Give Pokemon
 This allows you to give a player a pokemon
 ```skript
-givepoke {_player} random shiny
+givepoke {_player} "random shiny"
 ```
 
 #### Dialogue Box
 This allows you to open a dialogue box for a player
 ```skript
-add Test one to {_choices::*}
-add Test two to {_choices::*}
+add "Test one" to {_choices::*}
+add "Test two" to {_choices::*}
 dialogue for {_player} title "Hello World" description "Description!" with {_choices::*}
 ```
 
@@ -192,40 +192,46 @@ on successful capture:
 ### Example
 ```skript
 on join:
-set {_player} to player
+   set {_player} to player
 
-message "%{_player}%"
+   message "%{_player}%"
 
-set {_pokemon} to pokemon 1 of {_player}
-set {_dex} to {_pokemon}'s dex
-set {_formatted_dex} to {_pokemon}'s formatteddex
-message "%{_pokemon}% %{_dex}% %{_formatted_dex}%"
-wait 2 seconds
-add Test one to {_choices::*}
-add Test two to {_choices::*}
-not closeable input for {_player} title "Hello World" description "Enter text please" with default text "Wow!"
+   set {_pokemon} to pokemon 1 of {_player}
+   set {_dex} to {_pokemon}'s dex
+   set {_formatted_dex} to {_pokemon}'s formatteddex
+   message "%{_pokemon}% %{_dex}% %{_formatted_dex}%"
+   wait 2 seconds
+   add "Test one" to {_choices::*}
+   add "Test two" to {_choices::*}
+   not closeable input for {_player} title "Hello World" description "Enter text please" with default text "Wow!"
 
-set {_location} to position of {_player}
+   set {_location} to position of {_player}
 
-pokespawn {_location} random shiny
+   pokespawn {_location} "random shiny"
 
-if {_pokemon} matches shiny:
-set {_name} to {_pokemon}'s species
-message "%{_name}%"
-wait 10 seconds
-givepoke {_player} random shiny
+   if {_pokemon} matches "shiny":
+      set {_name} to {_pokemon}'s species
+      message "%{_name}%"
+      wait 10 seconds
+      givepoke {_player} "random shiny"
 
 on choice:
-set {_player} to player
-set {_choice} to choice
-message "%{_player}% %{_choice}%"
+   set {_player} to player
+   set {_choice} to choice
+   message "%{_player}% %{_choice}%"
 
 on dialogue input:
-message "Hello World"
-set {_player} to player
-set {_input} to event-string
-message "%{_player}% %{_input}%"
+   message "Hello World"
+   set {_player} to player
+   set {_input} to event-string
+   message "%{_player}% %{_input}%"
 
 on dialogue input close:
-message "wow!"
+   message "wow!"
+
+on successful capture:
+   set {_player} to player
+   set {_pokemon} to event-pixelmon
+   set {_test} to event-pokemon
+   message "WOW! %{_pokemon}% %{_player}% %{_test}%"
 ```
