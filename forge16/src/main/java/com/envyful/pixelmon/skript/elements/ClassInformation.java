@@ -9,6 +9,7 @@ import com.pixelmonmod.pixelmon.api.dialogue.Choice;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.api.pokemon.ability.Ability;
 import com.pixelmonmod.pixelmon.api.pokemon.ability.AbilityRegistry;
+import com.pixelmonmod.pixelmon.entities.npcs.NPCEntity;
 import com.pixelmonmod.pixelmon.entities.pixelmon.PixelmonEntity;
 
 public class ClassInformation {
@@ -116,6 +117,30 @@ public class ClassInformation {
                     @Override
                     public String toVariableNameString(Choice pokemon) {
                         return pokemon.text;
+                    }
+
+                    @Override
+                    public boolean canParse(ParseContext context) {
+                        return false;
+                    }
+                }));
+        Classes.registerClass(new ClassInfo<>(NPCEntity.class, "npcentity")
+                .name("NPC Entity")
+                .description("Represents an NPC Entity in Pixelmon")
+                .usage("npc")
+                .after("string")
+                .user("npc")
+                .defaultExpression(new EventValueExpression<>(NPCEntity.class))
+                .parser(new Parser<>() {
+
+                    @Override
+                    public String toString(NPCEntity pokemon, int flags) {
+                        return toVariableNameString(pokemon);
+                    }
+
+                    @Override
+                    public String toVariableNameString(NPCEntity pokemon) {
+                        return pokemon.toString();
                     }
 
                     @Override
