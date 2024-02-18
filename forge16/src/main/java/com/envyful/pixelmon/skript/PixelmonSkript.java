@@ -10,7 +10,6 @@ import com.pixelmonmod.pixelmon.Pixelmon;
 import com.pixelmonmod.pixelmon.api.events.CaptureEvent;
 import com.pixelmonmod.pixelmon.api.events.dialogue.DialogueInputEvent;
 import com.pixelmonmod.pixelmon.api.events.npc.NPCEvent;
-import com.pixelmonmod.pixelmon.entities.npcs.NPCEntity;
 import net.minecraftforge.eventbus.api.EventPriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
