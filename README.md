@@ -189,6 +189,15 @@ on successful capture:
    message "WOW! %{_pokemon}% %{_player}% %{_test}%"
 ```
 
+#### NPC Interact Event
+This event is triggered when a player interacts with a Pixelmon NPC
+```skript
+on npc interact:
+   set {_entity} to event-npc
+   set {_player} to player
+   message "WOW! %{_entity}%"
+```
+
 ### Example
 ```skript
 on join:
