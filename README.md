@@ -186,7 +186,7 @@ on successful capture:
    set {_player} to player
    set {_pokemon} to event-pokemon
    set {_entity} to event-pixelmon
-   message "WOW! %{_pokemon}% %{_player}% %{_test}%"
+   message "WOW! %{_pokemon}% %{_player}% %{_entity}%"
 ```
 
 #### NPC Interact Event
