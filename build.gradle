@@ -2,7 +2,7 @@ subprojects {
     apply plugin: 'java'
 
     group = 'com.envyful.pixelmon.skript'
-    version = '1.0.1'
+    version = '1.0.2'
 
     ext {
         forgeVersion = "none"
