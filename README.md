@@ -158,7 +158,7 @@ This event is triggered when a player selects a choice from a dialogue box
 ```skript
 on choice:
   set {_player} to player
-  set {_choice} to choice
+  set {_choice} to event-choice
   message "%{_player}% %{_choice}%"
 ```
 
