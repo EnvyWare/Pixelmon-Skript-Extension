@@ -1,4 +1,4 @@
-# Pixelmon Skript Extension [![Join our Discord](https://img.shields.io/discord/831966641586831431.svg?logo=discord&label=)](https://discord.envyware.co.uk) 
+# Pixelmon Skript Extension [![Join our Discord](https://img.shields.io/discord/831966641586831431.svg?logo=discord&label=)](https://discord.envyware.co.uk) [![Downloads](https://img.shields.io/github/downloads/EnvyWare/Pixelmon-Skript-Extension/total.svg)](https://github.com/EnvyWare/Pixelmon-Skript-Extension/releases)
 An extension for the Skript language on Spigot that adds Pixelmon API support
 
 
