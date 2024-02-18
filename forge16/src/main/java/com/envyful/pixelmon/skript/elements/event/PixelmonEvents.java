@@ -10,6 +10,7 @@ import com.envyful.pixelmon.skript.event.DialogueInputSubmitEvent;
 import com.envyful.pixelmon.skript.event.SuccessfulCaptureEvent;
 import com.pixelmonmod.pixelmon.api.dialogue.Choice;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
+import com.pixelmonmod.pixelmon.entities.pixelmon.PixelmonEntity;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -46,6 +47,13 @@ public class PixelmonEvents {
             @Override
             public Pokemon get(SuccessfulCaptureEvent e) {
                 return e.getEvent().getPokemon().getPokemon();
+            }
+        }, 0);
+
+        EventValues.registerEventValue(SuccessfulCaptureEvent.class, PixelmonEntity.class, new Getter<>() {
+            @Override
+            public PixelmonEntity get(SuccessfulCaptureEvent e) {
+                return e.getEvent().getPokemon();
             }
         }, 0);
 
