@@ -15,7 +15,7 @@ import org.bukkit.event.Event;
 public class DialogueInputEffect extends Effect {
 
     static {
-        Skript.registerEffect(DialogueInputEffect.class, "(1¦closeable|2¦not closeable) input for %player% title %string% description %string% with default text %string%");
+        Skript.registerEffect(DialogueInputEffect.class, "(1¦closeable|2¦not closeable) input for %player% title %string% description %string% with default text %strings%");
     }
 
     private Expression<Player> player;

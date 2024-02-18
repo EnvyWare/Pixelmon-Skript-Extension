@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class DialogueEffect extends Effect {
 
     static {
-        Skript.registerEffect(DialogueEffect.class, "dialogue for %player% title %string% description %string% with %string%");
+        Skript.registerEffect(DialogueEffect.class, "dialogue for %player% title %string% description %string% with %strings%");
     }
 
     private Expression<Player> player;
