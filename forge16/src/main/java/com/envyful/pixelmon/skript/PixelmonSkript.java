@@ -8,6 +8,7 @@ import com.envyful.pixelmon.skript.event.NPCInteractEvent;
 import com.envyful.pixelmon.skript.event.SuccessfulCaptureEvent;
 import com.pixelmonmod.pixelmon.Pixelmon;
 import com.pixelmonmod.pixelmon.api.events.CaptureEvent;
+import com.pixelmonmod.pixelmon.api.events.dialogue.DialogueChoiceEvent;
 import com.pixelmonmod.pixelmon.api.events.dialogue.DialogueInputEvent;
 import com.pixelmonmod.pixelmon.api.events.npc.NPCEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -33,6 +34,7 @@ public class PixelmonSkript extends JavaPlugin {
         Pixelmon.EVENT_BUS.addListener(EventPriority.HIGH, true, DialogueInputEvent.ClosedScreen.class, event -> this.getServer().getPluginManager().callEvent(new DialogueInputCloseEvent(event)));
         Pixelmon.EVENT_BUS.addListener(EventPriority.HIGH, true, CaptureEvent.SuccessfulCapture.class,event -> this.getServer().getPluginManager().callEvent(new SuccessfulCaptureEvent(event)));
         Pixelmon.EVENT_BUS.addListener(EventPriority.HIGH, true, NPCEvent.Interact.class,event -> this.getServer().getPluginManager().callEvent(new NPCInteractEvent(event)));
+        Pixelmon.EVENT_BUS.addListener(EventPriority.HIGH, true, DialogueChoiceEvent.class, event -> this.getServer().getPluginManager().callEvent(new com.envyful.pixelmon.skript.event.DialogueChoiceEvent(event)));
     }
 
     @Override

@@ -39,12 +39,14 @@ public class DialogueEffect extends Effect {
             return;
         }
 
+        System.out.println("DialogueEffect.execute: " + players + " " + title + " " + description + " " + String.join(", ", choice));
+
         var builder = Dialogue.builder()
                 .setName(title)
                 .setText(description)
                 .setChoices(Lists.newArrayList(
                         Lists.newArrayList(choice).stream()
-                                .map(s -> Choice.builder().setText(s).setHandle(dialogueChoiceEvent -> Bukkit.getPluginManager().callEvent(new DialogueChoiceEvent(dialogueChoiceEvent))).build())
+                                .map(s -> Choice.builder().setText(s).build())
                                 .collect(Collectors.toList())));
 
         if (event instanceof DialogueChoiceEvent) {
